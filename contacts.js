@@ -11,8 +11,7 @@ async function getContacts() {
     const contacts = JSON.parse(data);
     return contacts;
   } catch (error) {
-    console.log(error.name);
-    console.log(error.message);
+    console.warn(`\x1B[31m${error.message}`);
     return null;
   }
 }
