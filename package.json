@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "GoIT Homework #1 Node.js. CLI application",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index",
     "start:dev": "nodemon index",
