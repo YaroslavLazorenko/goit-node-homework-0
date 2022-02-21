@@ -5,7 +5,7 @@ async function getContactById(contactId) {
   if (!contacts) return null;
 
   const contact = contacts.find((contact) => contact.id === contactId);
-  return contact ? contact : null;
+  return contact || null;
 }
 
-module.exports =  getContactById ;
+module.exports = getContactById;
