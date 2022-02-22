@@ -6,6 +6,8 @@ const {
   removeContact,
   updateContact,
 } = require("../../controllers/contacts");
+const { addContactSchema, updateContactSchema } = require("../../schemas");
+const { validateBody } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -26,7 +28,7 @@ router.get("/:contactId", async (req, res, next) => {
   res.json({ status: "success", code: 200, data: { result } });
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", validateBody(addContactSchema), async (req, res, next) => {
   const { name, email, phone } = req.body;
   const result = await addContact(name, email, phone);
   res.status(201).json({ status: "success", code: 201, data: { result } });
@@ -45,13 +47,17 @@ router.delete("/:contactId", async (req, res, next) => {
     .json({ status: "error", code: 404, message: "Not found" });
 });
 
-router.put("/:contactId", async (req, res, next) => {
-  const result = await updateContact(req.params.contactId, req.body);
-  if (!result)
-    return res
-      .status(404)
-      .json({ status: "error", code: 404, message: "Not found" });
-  res.json({ status: "success", code: 200, data: { result } });
-});
+router.put(
+  "/:contactId",
+  validateBody(updateContactSchema),
+  async (req, res, next) => {
+    const result = await updateContact(req.params.contactId, req.body);
+    if (!result)
+      return res
+        .status(404)
+        .json({ status: "error", code: 404, message: "Not found" });
+    res.json({ status: "success", code: 200, data: { result } });
+  }
+);
 
 module.exports = router;
