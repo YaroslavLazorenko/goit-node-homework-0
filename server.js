@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const app = require("./app");
 
-const { DB_HOST, PORT = 3000 } = process.env;
+const { DEFAULT_SERVER_PORT } = require("./consts");
+const { DB_HOST, PORT = DEFAULT_SERVER_PORT } = process.env;
 
 mongoose
   .connect(DB_HOST)
