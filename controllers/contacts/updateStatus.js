@@ -1,12 +1,12 @@
-const { updateContact } = require("../../repository/contacts");
+const { updateStatus } = require("../../repository/contacts");
 const {
   HTTP_STATUS_CODE,
   HTTP_STATUS,
   HTTP_MESSAGE,
 } = require("../../libs/consts");
 
-const updateById = async (req, res, next) => {
-  const result = await updateContact(req.params.contactId, req.body);
+const updateStatusContact = async (req, res, next) => {
+  const result = await updateStatus(req.params.contactId, req.body);
   if (!result)
     return res.status(HTTP_STATUS_CODE.NOT_FOUND).json({
       status: HTTP_STATUS.ERROR,
@@ -20,4 +20,4 @@ const updateById = async (req, res, next) => {
   });
 };
 
-module.exports = updateById;
+module.exports = updateStatusContact;

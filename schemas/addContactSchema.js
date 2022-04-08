@@ -20,6 +20,7 @@ const addContactSchema = Joi.object({
       "any.required": "Missing required phone number field",
       "string.empty": "Phone number field cannot be an empty string",
     }),
+  favorite: Joi.boolean(),
 });
 
 module.exports = addContactSchema;

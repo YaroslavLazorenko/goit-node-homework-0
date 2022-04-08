@@ -1,8 +1,10 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
+const { HTTP_STATUS_CODE, HTTP_MESSAGE } = require("./libs/consts");
 
 const app = express();
 
@@ -15,11 +17,13 @@ app.use(express.json());
 app.use("/api/contacts", contactsRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(HTTP_STATUS_CODE.NOT_FOUND).json({ message: HTTP_MESSAGE.NOT_FOUND });
 });
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message });
+  res
+    .status(HTTP_STATUS_CODE.INTERNAL_SERVER_ERROR)
+    .json({ message: err.message });
 });
 
 module.exports = app;
