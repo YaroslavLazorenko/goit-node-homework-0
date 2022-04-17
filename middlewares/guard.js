@@ -5,7 +5,6 @@ const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const guard = async (req, res, next) => {
   const token = req.get("Authorization")?.split(" ")[1];
-  console.log("token ", token);
   const isValid = verifyToken(token);
 
   if (!isValid) {
