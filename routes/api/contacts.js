@@ -12,26 +12,28 @@ const {
   updateContactSchema,
   updateStatusSchema,
 } = require("../../schemas");
-const { validateBody, ctrlWrapper } = require("../../middlewares");
+const { validateBody, ctrlWrapper, guard } = require("../../middlewares");
 
 const router = express.Router();
 
-router.get("/", ctrlWrapper(getAll));
+router.get("/", guard, ctrlWrapper(getAll));
 
-router.get("/:contactId", ctrlWrapper(getById));
+router.get("/:contactId", guard, ctrlWrapper(getById));
 
-router.post("/", validateBody(addContactSchema), ctrlWrapper(add));
+router.post("/", guard, validateBody(addContactSchema), ctrlWrapper(add));
 
-router.delete("/:contactId", ctrlWrapper(removeById));
+router.delete("/:contactId", guard, ctrlWrapper(removeById));
 
 router.put(
   "/:contactId",
+  guard,
   validateBody(updateContactSchema),
   ctrlWrapper(updateById)
 );
 
 router.patch(
   "/:contactId/favorite",
+  guard,
   validateBody(updateStatusSchema),
   ctrlWrapper(updateStatusContact)
 );
