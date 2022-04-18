@@ -25,4 +25,14 @@ const logout = async (req, res) => {
   return res.status(HTTP_STATUS_CODE.NO_CONTENT).json();
 };
 
-module.exports = { signup, login, logout };
+const current = async (req, res) => {
+  const { email, subscription } = req.user;
+  return res.status(HTTP_STATUS_CODE.OK).json({
+    status: HTTP_STATUS.SUCCESS,
+    code: HTTP_STATUS_CODE.OK,
+    email,
+    subscription,
+  });
+};
+
+module.exports = { signup, login, logout, current };
