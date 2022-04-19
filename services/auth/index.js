@@ -14,9 +14,8 @@ class AuthService {
     const newUser = await Users.create(body);
 
     return {
-      id: newUser.id,
       email: newUser.email,
-      password: newUser.password,
+      subscription: newUser.subscription,
     };
   }
 

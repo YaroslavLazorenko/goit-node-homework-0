@@ -15,8 +15,10 @@ const login = async (req, res) => {
   return res.status(HTTP_STATUS_CODE.OK).json({
     status: HTTP_STATUS.SUCCESS,
     code: HTTP_STATUS_CODE.OK,
-    token,
-    user: { email, subscription },
+    data: {
+      token,
+      user: { email, subscription },
+    },
   });
 };
 
@@ -30,8 +32,10 @@ const current = async (req, res) => {
   return res.status(HTTP_STATUS_CODE.OK).json({
     status: HTTP_STATUS.SUCCESS,
     code: HTTP_STATUS_CODE.OK,
-    email,
-    subscription,
+    data: {
+      email,
+      subscription,
+    },
   });
 };
 
