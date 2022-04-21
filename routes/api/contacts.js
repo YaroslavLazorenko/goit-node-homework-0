@@ -11,7 +11,7 @@ const {
   addContactSchema,
   updateContactSchema,
   updateStatusSchema,
-} = require("../../schemas");
+} = require("../../schemas/contacts");
 const { validateBody, ctrlWrapper, guard } = require("../../middlewares");
 
 const router = express.Router();
