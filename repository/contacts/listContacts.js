@@ -1,8 +1,10 @@
 const Contact = require("../../models/contact");
+const { PAGINATION } = require("../../libs/consts");
 
 async function listContacts(req, res) {
   const { _id } = req.user;
-  const { page = 1, limit = 10 } = req.query;
+  const { page = PAGINATION.DEFAULT_PAGE, limit = PAGINATION.DEFAULT_LIMIT } =
+    req.query;
   const { favorite } = req.query;
 
   const skip = (page - 1) * limit;

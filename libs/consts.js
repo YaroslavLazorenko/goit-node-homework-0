@@ -8,6 +8,8 @@ const HTTP_STATUS = {
 const HTTP_MESSAGE = {
   NOT_FOUND: "Not found",
   DELETED: "Contact deleted",
+  CONFLICT: "Email in use",
+  UNAUTHORIZED: "Email or password is wrong",
 };
 
 const HTTP_STATUS_CODE = {
@@ -23,10 +25,16 @@ const HTTP_STATUS_CODE = {
 
 const SALT_ROUNDS = 10;
 
+const PAGINATION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 10,
+};
+
 module.exports = {
   DEFAULT_SERVER_PORT,
   HTTP_STATUS,
   HTTP_STATUS_CODE,
   HTTP_MESSAGE,
   SALT_ROUNDS,
+  PAGINATION,
 };

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const Users = require("../../repository/users");
-const { HTTP_STATUS_CODE } = require("../../libs/consts");
+const { HTTP_STATUS_CODE, HTTP_MESSAGE } = require("../../libs/consts");
 const { CustomError } = require("../../middlewares/customErrors");
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
@@ -9,7 +9,7 @@ class AuthService {
   async create(body) {
     const user = await Users.findByEmail(body.email);
     if (user) {
-      throw new CustomError(HTTP_STATUS_CODE.CONFLICT, "Email in use");
+      throw new CustomError(HTTP_STATUS_CODE.CONFLICT, HTTP_MESSAGE.CONFLICT);
     }
     const newUser = await Users.create(body);
 
@@ -24,12 +24,17 @@ class AuthService {
     if (!user) {
       throw new CustomError(
         HTTP_STATUS_CODE.UNAUTHORIZED,
-        "Email or password is wrong"
+        HTTP_MESSAGE.UNAUTHORIZED
       );
     }
     const token = this.generateToken(user);
     await Users.updateToken(user.id, token);
     return { email: user.email, subscription: user.subscription, token };
+  }
+
+  async updateSubscription({ _id }, { subscription }) {
+    const result = await Users.updateSubscription(_id, subscription);
+    return result;
   }
 
   async logout(id) {

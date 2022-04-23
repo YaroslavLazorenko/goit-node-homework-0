@@ -1,3 +1,4 @@
 const authSchema = require("./authSchema");
+const updateSubscriptionSchema = require("./updateSubscriptionSchema");
 
-module.exports = { authSchema };
+module.exports = { authSchema, updateSubscriptionSchema };
