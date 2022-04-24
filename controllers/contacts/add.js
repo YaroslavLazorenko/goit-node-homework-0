@@ -3,7 +3,8 @@ const { HTTP_STATUS_CODE, HTTP_STATUS } = require("../../libs/consts");
 
 const add = async (req, res, next) => {
   const { name, email, phone, favorite = false } = req.body;
-  const result = await addContact(name, email, phone, favorite);
+  const { _id } = req.user;
+  const result = await addContact(name, email, phone, favorite, _id);
   res.status(HTTP_STATUS_CODE.CREATED).json({
     status: HTTP_STATUS.SUCCESS,
     code: HTTP_STATUS_CODE.CREATED,
